@@ -1,10 +1,9 @@
-
 <template>
-
-    <router-view/>
+  首页
 </template>
 
 <script setup>
+
 </script>
 
 <style scoped>
