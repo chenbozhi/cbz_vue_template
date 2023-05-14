@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "vue": "^3.2.47"
+    "vant": "^4.3.1",
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.2"
   }
 }
