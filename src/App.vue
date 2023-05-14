@@ -1,8 +1,10 @@
 
 <template>
-    <el-config-provider :locale="zhCn">
+<!--    <el-config-provider :locale="zhCn">
+        <router-view/>
+    </el-config-provider>-->
 
-    </el-config-provider>
+    <router-view/>
 </template>
 
 <script setup>

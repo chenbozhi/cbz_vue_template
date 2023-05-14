@@ -2,23 +2,15 @@
 
     <van-nav-bar fixed title="首页"/>
 
-    <div style="height: 100vh;display: flex;flex-direction: column;background-color: rebeccapurple;">
-        <div style="height: 60px;width: 100%;background-color: antiquewhite;">
-
-        </div>
-        <div style="flex: 1;">
-            <van-pull-refresh v-model="refreshing" @refresh="onRefresh" style="">
-                <van-list
-                    v-model:loading="loading"
-                    :finished="finished"
-                    finished-text="没有更多了"
-                    @load="onLoad"
-                >
-                    <van-cell v-for="item in list" :key="item" :title="item"/>
-                </van-list>
-            </van-pull-refresh>
-        </div>
-        <div style="height: 60px;width: 100%;background-color: chartreuse;"></div>
+    <div style="margin-top: 50px;">
+        <van-grid :column-num="3">
+            <van-grid-item>
+                <div  @click="goToBillList">账单列表</div>
+            </van-grid-item>
+            <van-grid-item>
+                <div @click="goToAddBill">添加账单</div>
+            </van-grid-item>
+        </van-grid>
     </div>
 
     <van-tabbar v-model="active">
@@ -34,43 +26,27 @@
 
 import {ref} from "vue";
 
+import {useRouter} from "vue-router";
+
+const router = useRouter()
+
 const active = ref(0)
 
-const list = ref([]);
-const loading = ref(false);
-const finished = ref(false);
-const refreshing = ref(false);
+const goToBillList = () => {
+    router.push({
+        name: 'billList',
+        params: {}
+    })
+}
 
-const onLoad = () => {
-    setTimeout(() => {
-        if (refreshing.value) {
-            list.value = [];
-            refreshing.value = false;
-        }
-
-        for (let i = 0; i < 10; i++) {
-            list.value.push(list.value.length + 1);
-        }
-        loading.value = false;
-
-        if (list.value.length >= 40) {
-            finished.value = true;
-        }
-    }, 1000);
-};
-
-const onRefresh = () => {
-    // 清空列表数据
-    finished.value = false;
-
-    // 重新加载数据
-    // 将 loading 设置为 true，表示处于加载状态
-    loading.value = true;
-    onLoad();
-};
+const goToAddBill = () => {
+    router.push({
+        name: 'addBill',
+        params: {}
+    })
+}
 
 </script>
 
 <style scoped>
-
 </style>
