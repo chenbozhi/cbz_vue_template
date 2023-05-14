@@ -8,6 +8,11 @@
 </template>
 
 <script setup>
+
+import { ElConfigProvider } from 'element-plus'
+
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+
 // 禁用双指放大
 document.documentElement.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
@@ -28,9 +33,6 @@ document.documentElement.addEventListener('touchend', function (event) {
 }, {
     passive: false
 })
-import { ElConfigProvider } from 'element-plus'
-
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 </script>
 
