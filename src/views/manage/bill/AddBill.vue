@@ -1,31 +1,52 @@
 <template>
-    <van-nav-bar fixed left-arrow
-                 left-text="返回"
-                 title="添加账单"
-                 @click-left="onClickLeft"/>
 
-    <div style="height: 50px;"></div>
 
-    <van-grid>
-        <van-grid-item v-for="value in 8" :key="value" icon="todo-list" text="文字" />
-    </van-grid>
+    <TopNavBar title="添加账单"/>
 
-    <van-field v-model="value" label="文本" placeholder="请输入备注" @focus="show = true"/>
+    <div class="s-card-container">
+        <el-scrollbar :height="height" always>
+            <van-grid>
+                <van-grid-item v-for="tag in billTagList" :key="tag.id" @click="tag.clicked = !tag.clicked">
+                    <template #default>
+                        <div :class="{'s-card-item': true, 's-card-clicked': tag.clicked}">
+                            <div>
+                                <van-icon :name="tag.icon"/>
+                            </div>
+                            <div>{{ tag.name }}</div>
+                        </div>
+                    </template>
+                </van-grid-item>
+            </van-grid>
+        </el-scrollbar>
+    </div>
+
+    <van-field ref="input"
+               v-model="value"
+               class="s-input"
+               label="备注"
+               placeholder="请输入备注"
+               @blur="show = true" @focus="show = true">
+        <template #extra>
+            <span class="s-money">{{ money }}</span>
+        </template>
+    </van-field>
+
 
     <van-number-keyboard
+            v-model="money"
             :show="show"
-            theme="custom"
-            extra-key="."
             close-button-text="完成"
-            @blur="show = false"
-            @input="onInput"
-            @delete="onDelete"
+            extra-key="."
+            theme="custom"
     />
+
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {showToast} from "vant";
+import {billTags} from './billData.js'
+import TopNavBar from "@/components/TopNavBar.vue";
 
 const onClickLeft = () => {
     history.go(-1)
@@ -33,11 +54,66 @@ const onClickLeft = () => {
 
 const value = ref('')
 
+const money = ref('0')
+
+const inputNumberOffsetTop = ref(0)
+
+const input = ref("input")
+
 const show = ref(true);
-const onInput = (value) => showToast(value);
-const onDelete = () => showToast('删除');
+/*const onInput = (value) => {
+    money.value = value
+}*/
+const onDelete = () => {
+
+}
+
+onMounted(() => {
+    inputNumberOffsetTop.value = document.getElementsByClassName("van-number-keyboard")[0].offsetTop
+    console.log('offsetTop:', inputNumberOffsetTop.value)
+    console.log('document.body.clientHeight:', window.screen.availHeight)
+    height.value = inputNumberOffsetTop.value - 44 - 50
+})
+
+const inputStyle = computed(() => {
+    return {
+        top: show.value ? (inputNumberOffsetTop.value - 94) + 'px' : (inputNumberOffsetTop.value + 244 - 44 - 50) + 'px',
+    }
+})
+
+const height = ref(350)
+
+const billTagList = ref(billTags)
+
+watch(show, (value) => {
+})
+
 </script>
 
 <style scoped>
 
+:deep(.van-grid-item__content) {
+    padding: 0;
+}
+
+.s-card-item {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 15px;
+}
+
+.s-card-clicked {
+    background-color: #2DB0FE;
+    color: white;
+}
+
+.s-money {
+    color: #F6A125;
+    font-weight: bold;
+    font-size: 20px;
+}
 </style>

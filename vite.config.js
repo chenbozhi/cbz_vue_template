@@ -35,7 +35,7 @@ export default defineConfig({
     },
     // 代理配置
     server: {
-        port: 8081,
+        port: 5000,
         host: '0.0.0.0',  // 为了设置局域网可以访问
         https: false,
         proxy: {

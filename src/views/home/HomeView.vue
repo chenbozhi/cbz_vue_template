@@ -10,6 +10,12 @@
             <van-grid-item>
                 <div @click="goToAddBill">添加账单</div>
             </van-grid-item>
+            <van-grid-item>
+                <div @click="goToAddBillTag">添加账单标签</div>
+            </van-grid-item>
+            <van-grid-item>
+                <div @click="goToBillTagList">账单标签列表</div>
+            </van-grid-item>
         </van-grid>
     </div>
 
@@ -42,6 +48,20 @@ const goToBillList = () => {
 const goToAddBill = () => {
     router.push({
         name: 'addBill',
+        params: {}
+    })
+}
+
+const goToAddBillTag = () => {
+    router.push({
+        name: 'addBillTag',
+        params: {}
+    })
+}
+
+const goToBillTagList = () => {
+    router.push({
+        name: 'billTagList',
         params: {}
     })
 }

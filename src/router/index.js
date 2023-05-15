@@ -1,7 +1,9 @@
 import * as VueRouter from 'vue-router'
-import HomeView from "../views/home/HomeView.vue";
-import BillList from "../views/manage/bill/BillList.vue";
-import AddBill from "../views/manage/bill/AddBill.vue";
+import AddBillTag from "@/views/manage/bill/AddBillTag.vue";
+import HomeView from "@/views/home/HomeView.vue";
+import BillList from "@/views/manage/bill/BillList.vue";
+import AddBill from "@/views/manage/bill/AddBill.vue";
+import BillTagList from "@/views/manage/bill/BillTagList.vue";
 
 
 const routes = [
@@ -28,9 +30,25 @@ const routes = [
     {
         name: 'addBill',
         path: '/manage/addBill',
-        component:  AddBill,
+        component: AddBill,
         meta: {
             title: '添加账单',
+        }
+    },
+    {
+        name: 'addBillTag',
+        path: '/manage/addBillTag',
+        component: AddBillTag,
+        meta: {
+            title: '添加账单标签',
+        }
+    },
+    {
+        name: 'billTagList',
+        path: '/manage/billTagList',
+        component: BillTagList,
+        meta: {
+            title: '账单标签列表',
         }
     },
 ]
