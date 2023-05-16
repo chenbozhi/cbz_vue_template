@@ -4,7 +4,9 @@
         <router-view/>
     </el-config-provider>-->
 
-    <router-view/>
+    <div class="s-app-container">
+        <router-view/>
+    </div>
 </template>
 
 <script setup>
@@ -38,4 +40,14 @@ document.documentElement.addEventListener('touchend', function (event) {
 
 <style scoped>
 
+.s-app-container {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; /* 解决ios滑动不流畅问题 */
+}
 </style>

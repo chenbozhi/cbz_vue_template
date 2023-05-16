@@ -116,4 +116,5 @@ watch(show, (value) => {
     font-weight: bold;
     font-size: 20px;
 }
+
 </style>
